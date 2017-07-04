@@ -1,0 +1,25 @@
+from grovepi import *
+from grove_rgb_lcd import *
+import time
+from math import *
+
+
+dht_sensor_port = 7
+dht_sensor_type = 0
+
+temp_sensor = 0
+lum_sensor = 1
+
+button = 3
+
+But du programme :
+
+    Prendre les valeurs toutes les 5 minutes par une variable t_refresh = time.time() + 60*5
+    Dans while true, un if time.time() > t_refresh ==> on refresh les valeurs
+    Ensuite on gère l affichage selon la valeur définie par le bouton.
+
+    Dans le if du refresh, on mettra aussi le code pour envoyer les valeurs dans le hub azure
+
+A priori, on a fait le tour
+
+https://docs.microsoft.com/fr-fr/azure/iot-hub/iot-hub-python-getstarted
