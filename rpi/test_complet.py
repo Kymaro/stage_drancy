@@ -27,8 +27,8 @@ pinMode(potentiometer,"INPUT")
 pinMode(lum_sensor,"INTPUT")
 time.sleep(1)
 
-t_refresh = 3000
-t_actuator = 2000
+t_refresh = 6000
+t_actuator = 6000
 temp_dht = 0
 hum = 0
 tempe = 0 
@@ -99,9 +99,11 @@ while True :
         print(msg)
     screen_administrator()
     time.sleep(50.0/1000.0)
-    t_refresh += 100
+    t_refresh += 50
 
 """
 https://docs.microsoft.com/fr-fr/azure/iot-hub/iot-hub-python-getstarted
 http://www.stevenfowler.me/p/send-raspberry-pi-data-azuure/
+
+login azure cli : "azure login"
 """
