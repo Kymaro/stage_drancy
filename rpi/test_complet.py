@@ -31,7 +31,7 @@ lum = 0
 
 setText("Bienvenue\ndans l'IoT Hub")
 setRGB(128,255,0)
-time.sleep(5)
+time.sleep(2)
 
 def DHT() :
     global temp_dht,hum
@@ -47,13 +47,14 @@ while True :
 
     if ( t_refresh >= t_actuator) : 
     	DHT()
-    	#temperature()
+	time.sleep(1) #sans ça, conflit entre capteur.
+    	temperature()
     	print(temp_dht)
     	print(hum)
-    	#print(temp)
-	    print(analogRead(temp_sensor))
-    	t_refresh = 0
+    	print(tempe)
+	t_refresh = 0
     time.sleep(1)
+    t_refresh += 1000
 
 
 """
