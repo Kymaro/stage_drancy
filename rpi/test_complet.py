@@ -57,22 +57,22 @@ def PotentiometerToDegrees(potentiometer_value) :
     degrees = round((voltage*full_angle)/grove_vcc,2)
     return degrees
 
-def screen_administrator() :
+def screen_administrator(mode) :
     average_degrees = 0
     for i in range(10) :
-        value = PotentiometerToDerees(analogRead(potentiometer))
+        value = PotentiometerToDegrees(analogRead(potentiometer))
         average_degrees += value / 10.0
         time.sleep(1.0/1000.0)
 
-    if (average_degrees <= 100 and average_degrees >= 0) and mode_value != 1: #MODE 1
+    if (average_degrees <= 100 and average_degrees >= 0) and mode != 1: #MODE 1
         setText("Temperature : \n" +str((tempe + temp_dht)/2.0))
         setRGB(0,128,255)
         mode_value = 1
-    elif (average_degrees <= 200 and average_degrees > 100) and mode_value != 2 : #MODE 2
+    elif (average_degrees <= 200 and average_degrees > 100) and mode != 2 : #MODE 2
         setText("Humidite : \n"+str(hum))
         setRGB(255,0,128)
         mode_value = 2
-    elif (average_degrees > 200 and average_degrees <=300) and mode_value != 3 : # MODE 3
+    elif (average_degrees > 200 and average_degrees <=300) and mode != 3 : # MODE 3
         setText("Luminosite \n"+"Bouton :"+str(button_value))
         setRGB(255,128,0)
         mode_value = 3   
@@ -91,7 +91,6 @@ while True :
     	print(tempe)
 	t_refresh = 0 
 
-    screen_administrator()
     time.sleep(50.0/1000.0)
     t_refresh += 100
 
