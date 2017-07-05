@@ -31,7 +31,7 @@ setRGB(128,255,0)
 
 While True :
 
-    if time.time() > t_refresh : #si on a dépassé les 5 minutes
+#    if (time.time() >= t_refresh) : #si on a dépassé les 5 minutes
         DHT()
         temperature()
         print(temp_dht)
