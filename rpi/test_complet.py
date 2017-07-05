@@ -26,7 +26,7 @@ t_actuator = 3000
 temp_dht = 0
 hum = 0
 tempe = 0 
-button_value = 0
+button_value = 1
 lum = 0
 
 setText("Bienvenue\ndans l'IoT Hub")
@@ -46,16 +46,14 @@ def temperature() :
 while True :
 
     if ( t_refresh >= t_actuator) : 
-    	DHT()
-	time.sleep(1) #sans ça, conflit entre capteur.
     	temperature()
+	DHT() #A faire en dernier car un delai de retour de valeur digital
     	print(temp_dht)
     	print(hum)
     	print(tempe)
-	t_refresh = 0
-    time.sleep(1)
+	t_refresh = 0    	
+    time.sleep(50.0/1000.0)
     t_refresh += 1000
-
 
 """
 https://docs.microsoft.com/fr-fr/azure/iot-hub/iot-hub-python-getstarted
