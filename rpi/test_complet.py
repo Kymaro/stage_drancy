@@ -64,6 +64,7 @@ def screen_administrator(mode) :
         average_degrees += value / 10.0
         time.sleep(1.0/1000.0)
 
+    print(average_degrees)
     if (average_degrees <= 100 and average_degrees >= 0) and mode != 1: #MODE 1
         setText("Temperature : \n" +str((tempe + temp_dht)/2.0))
         setRGB(0,128,255)
