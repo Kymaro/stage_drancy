@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from grovepi import *
 from grove_rgb_lcd import *
 import time
