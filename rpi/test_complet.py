@@ -68,18 +68,20 @@ def screen_administrator() :
         
 
     print(average_degrees)
-    if (average_degrees <= 100 and average_degrees >= 0) and mode_value != 1 : #MODE 1
-        setText("Temperature : \n" +str((tempe + temp_dht)/2.0))
-        setRGB(0,128,255)
-        mode_value = 1
-    elif (average_degrees <= 200 and average_degrees > 100) and mode_value != 2 : #MODE 2
-        setText("Humidite : \n"+str(hum))
-        setRGB(255,0,128)
-        mode_value = 2
-    elif (average_degrees > 200 and average_degrees <=300) and mode_value != 3 : # MODE 3
-        setText("Luminosite \n")
-        setRGB(255,128,0)
-        mode_value = 3   
+    if average_degrees != 152.4 :
+
+    	if (average_degrees <=100 and average_degrees >= 0) and mode_value != 1 : #MODE 1
+        	setText("Temperature : \n" +str((tempe + temp_dht)/2.0))
+        	setRGB(0,128,255)
+        	mode_value = 1
+    	elif (average_degrees <= 200 and average_degrees > 100) and mode_value != 2 : #MODE 2
+        	setText("Humidite : \n"+str(hum))
+        	setRGB(255,0,128)
+        	mode_value = 2
+    	elif (average_degrees > 200 and average_degrees <=300) and mode_value != 3 : # MODE 3
+        	setText("Luminosite \n")
+        	setRGB(255,128,0)
+        	mode_value = 3   
 
 
 
