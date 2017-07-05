@@ -10,7 +10,7 @@ from math import *
 dht_sensor_port = 7
 dht_sensor_type = 0
 
-temp_sensor = 0
+temp_sensor = 14
 lum_sensor = 1
 
 button = 3
@@ -22,6 +22,7 @@ R0 = 100000
 
 pinMode(button,"INTPUT")
 pinMode(led,"OUTPUT")
+pinMode(temp_sensor,"INTPUT")
 
 t_refresh = time.time() #on ne met pas les 5 minutes de plus pour réaliser la relève des capteurs une première fois
 temp_dht = 0
@@ -48,10 +49,11 @@ while True :
 
     if (time.time() >= t_refresh) : #si on a dépassé les 5 minutes
     	DHT()
-    	temperature()
+    	#temperature()
     	print(temp_dht)
     	print(hum)
-    	print(temp)
+    	#print(temp)
+	print(analogRead(temp_sensor))
     	t_refresh = time.time() + 1*5 #on met à jour la valeur de t_refresh pour la prochaine actualisation
             
 
