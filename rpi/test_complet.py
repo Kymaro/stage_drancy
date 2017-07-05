@@ -16,6 +16,10 @@ lum_sensor = 1
 button = 3
 led = 4
 
+B=4250
+R0 = 100000
+
+
 pinMode(button,"INTPUT")
 pinMode(led,"OUTPUT")
 
@@ -35,7 +39,9 @@ def DHT() :
 
 def temperature() :
     global tempe
-    tempe = temp(temp_sensor,'1.2')
+    analog_value = analogRead(temp_sensor)
+    R = 1024.0/analog_value - 1.0
+    tempe = 1.0/(log(R)/B + 1/298.15) - 273.15
 
 while True :
 
@@ -45,7 +51,7 @@ while True :
     	print(temp_dht)
     	print(hum)
     	print(temp)
-    	t_refresh = time.time() + 60*5 #on met à jour la valeur de t_refresh pour la prochaine actualisation
+    	t_refresh = time.time() + 1*5 #on met à jour la valeur de t_refresh pour la prochaine actualisation
             
 
 
