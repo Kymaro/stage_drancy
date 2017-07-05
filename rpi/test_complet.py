@@ -42,22 +42,24 @@ setText("Bienvenue\ndans l'IoT Hub")
 setRGB(128,255,0)
 time.sleep(2)
 
-def DHT() :
+def DHT() : #temperature et humidite analogique
     global temp_dht,hum
     [temp_dht,hum] = dht(dht_sensor_port,dht_sensor_type)
+    temp_dht = round(temp_dht,1)
 
-def Temperature() :
+def Temperature() : #capteur de temperature analogique
     global tempe
     analog_value = analogRead(temp_sensor)
     R = 1024.0/analog_value - 1.0
     tempe = 1.0/(log(R)/B + 1/298.15) - 273.15
+    tempe= round(tempe,1)
 
-def PotentiometerToDegrees(potentiometer_value) :
+def PotentiometerToDegrees(potentiometer_value) : #convertie la valeur du potentiometre en degree
     voltage = round((float)(potentiometer_value)*adc_ref / 1023,2)
     degrees = round((voltage*full_angle)/grove_vcc,2)
     return degrees
 
-def screen_administrator() :
+def screen_administrator() : # permet de gérer l'écran sans qu'il refresh à chaque itération 
     global mode_value
     average_degrees = 0
     for i in range(10) :
@@ -68,8 +70,7 @@ def screen_administrator() :
         
 
     print(average_degrees)
-    if average_degrees != 152.4 :
-
+    if average_degrees != 152.4 : # valeur qui apparait à chaque nouvel appel des valeurs des capteurs
     	if (average_degrees <=100 and average_degrees >= 0) and mode_value != 1 : #MODE 1
         	setText("Temperature : \n" +str((tempe + temp_dht)/2.0))
         	setRGB(0,128,255)
@@ -82,10 +83,6 @@ def screen_administrator() :
         	setText("Luminosite \n")
         	setRGB(255,128,0)
         	mode_value = 3   
-
-
-
-
 
 while True :
 
