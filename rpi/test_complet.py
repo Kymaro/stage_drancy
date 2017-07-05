@@ -9,6 +9,7 @@ dht_sensor_type = 0
 
 temp_sensor = 0
 lum_sensor = 1
+potentiometer = 2
 
 button = 3
 led = 4
@@ -20,6 +21,8 @@ R0 = 100000
 pinMode(button,"INTPUT")
 pinMode(led,"OUTPUT")
 pinMode(temp_sensor,"INTPUT")
+pinMode(potentiometer,"INPUT")
+pinMode(lum_sensor,"INTPUT")
 
 t_refresh = 3000
 t_actuator = 2000
@@ -28,6 +31,10 @@ hum = 0
 tempe = 0 
 button_value = 1
 lum = 0
+
+adc_ref = 5
+grove_vcc = 5
+full_angle = 300
 
 setText("Bienvenue\ndans l'IoT Hub")
 setRGB(128,255,0)
@@ -53,17 +60,19 @@ while True :
     	print(tempe)
 	t_refresh = 0   
 
-    if digitalRead(button) : #gestion de l'affichage
-        button_value += 1
-        if button_value == 1 :
-            setText("Temperature : \n" +str((tempe + temp_dht)/2.0))
-            setRGB(0,128,255) 	
-        elif button_value == 2:
-            setText("Humidite : \n"+str(hum))
-            setRGB(255,0,128)
-        elif button_value == 3 :
-            button_value = 0
-            setText("Luminosite \n"+"Bouton :"+str(button_value))
+    potentiometer_value = analogRead(potentiometer)
+    voltage = round((float)(potentiometer_value)*adc_ref / 1023,2)
+    degrees = round((voltage*full_angle)/grove_vcc,2)
+
+    if degrees <= 100 and degrees >= 0 :
+        setText("Temperature : \n" +str((tempe + temp_dht)/2.0))
+        setRGB(0,128,255) 	
+    elif degrees <= 200 and degrees > 100 :
+        setText("Humidite : \n"+str(hum))
+        setRGB(255,0,128)
+    else :
+        setText("Luminosite \n"+"Bouton :"+str(button_value))
+        setRGB(255,128,0)
         
     time.sleep(50.0/1000.0)
     t_refresh += 100
