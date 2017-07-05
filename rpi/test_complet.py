@@ -30,9 +30,11 @@ setText("Bienvenue\ndans l'IoT Hub")
 setRGB(128,255,0)
 
 def DHT() :
+    global temp_dht,hum
     [temp_dht,hum] = dht(dht_sensor_port,dht_sensor_type)
 
 def temperature() :
+    global temp
     temp = temp(temp_sensor,'1.2')
 
 while True :
