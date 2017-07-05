@@ -24,7 +24,8 @@ pinMode(button,"INTPUT")
 pinMode(led,"OUTPUT")
 pinMode(temp_sensor,"INTPUT")
 
-t_refresh = time.time() #on ne met pas les 5 minutes de plus pour réaliser la relève des capteurs une première fois
+t_refresh = 3000
+t_actuator = 3000
 temp_dht = 0
 hum = 0
 tempe = 0 
@@ -47,15 +48,15 @@ def temperature() :
 
 while True :
 
-    if (time.time() >= t_refresh) : #si on a dépassé les 5 minutes
+    if ( t_refresh >= t_actuator) : #si on a dépassé les 5 minutes
     	DHT()
     	#temperature()
     	print(temp_dht)
     	print(hum)
     	#print(temp)
-	print(analogRead(temp_sensor))
-    	t_refresh = time.time() + 1*5 #on met à jour la valeur de t_refresh pour la prochaine actualisation
-            
+	    print(analogRead(temp_sensor))
+    	t_refresh = 0
+    time.sleep(1)
 
 
 """
