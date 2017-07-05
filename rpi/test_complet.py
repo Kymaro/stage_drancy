@@ -59,7 +59,7 @@ def PotentiometerToDegrees(potentiometer_value) : #convertie la valeur du potent
     degrees = round((voltage*full_angle)/grove_vcc,2)
     return degrees
 
-def screen_administrator() : # permet de gérer l'écran sans qu'il refresh à chaque itération 
+def screen_administrator() : # permet de gerer lecran sans quil refresh a chaque iteration 
     global mode_value
     average_degrees = 0
     for i in range(10) :
@@ -70,7 +70,7 @@ def screen_administrator() : # permet de gérer l'écran sans qu'il refresh à c
         
 
     print(average_degrees)
-    if average_degrees != 152.4 : # valeur qui apparait à chaque nouvel appel des valeurs des capteurs
+    if not(average_degrees <= 154.0 and average_degrees >= 151.0) : # valeur qui apparait a chaque nouvel appel des valeurs des capteurs
     	if (average_degrees <=100 and average_degrees >= 0) and mode_value != 1 : #MODE 1
         	setText("Temperature : \n" +str((tempe + temp_dht)/2.0))
         	setRGB(0,128,255)
