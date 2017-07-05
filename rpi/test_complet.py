@@ -94,7 +94,7 @@ while True :
     	#print(temp_dht)
     	#print(hum)
     	#print(tempe)
-        average_temp = (tempe + temp_dht)/2.0)
+        average_temp = (tempe + temp_dht)/2.0
 	t_refresh = 0 
         dt = str(datetime.datetime.now())
         d = {'DeviceID' : ID, 'Temperature' : average_temp, 'Humidity' : hum,'Time' : dt }
