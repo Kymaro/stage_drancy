@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 from grovepi import *
 from grove_rgb_lcd import *
 import time
@@ -48,7 +45,7 @@ def temperature() :
 
 while True :
 
-    if ( t_refresh >= t_actuator) : #si on a dépassé les 5 minutes
+    if ( t_refresh >= t_actuator) : 
     	DHT()
     	#temperature()
     	print(temp_dht)
@@ -60,15 +57,5 @@ while True :
 
 
 """
-But du programme :
-
-    Prendre les valeurs toutes les 5 minutes par une variable t_refresh = time.time() + 60*5
-    Dans while true, un if time.time() > t_refresh ==> on refresh les valeurs
-    Ensuite on gère l affichage selon la valeur définie par le bouton.
-
-    Dans le if du refresh, on mettra aussi le code pour envoyer les valeurs dans le hub azure
-
-A priori, on a fait le tour
-
 https://docs.microsoft.com/fr-fr/azure/iot-hub/iot-hub-python-getstarted
 """
