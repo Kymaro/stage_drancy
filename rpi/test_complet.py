@@ -22,7 +22,7 @@ pinMode(led,"OUTPUT")
 t_refresh = time.time() #on ne met pas les 5 minutes de plus pour réaliser la relève des capteurs une première fois
 temp_dht = 0
 hum = 0
-temp = 0 
+tempe = 0 
 button_value = 0
 lum = 0
 
@@ -34,8 +34,8 @@ def DHT() :
     [temp_dht,hum] = dht(dht_sensor_port,dht_sensor_type)
 
 def temperature() :
-    global temp
-    temp = temp(temp_sensor,'1.2')
+    global tempe
+    tempe = temp(temp_sensor,'1.2')
 
 while True :
 
