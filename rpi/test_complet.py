@@ -69,9 +69,6 @@ def screen_administrator() : # permet de gerer lecran sans quil refresh a chaque
         average_degrees += value / 10.0
         time.sleep(1.0/1000.0)
 
-        
-
-    print(average_degrees)
     if not(average_degrees <= 154.0 and average_degrees >= 151.0) : # valeur qui apparait a chaque nouvel appel des valeurs des capteurs
     	if (average_degrees <=100 and average_degrees >= 0) and mode_value != 1 : #MODE 1
         	setText("Temperature : \n" +str((tempe + temp_dht)/2.0))
