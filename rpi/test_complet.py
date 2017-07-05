@@ -7,7 +7,7 @@ from math import *
 dht_sensor_port = 7
 dht_sensor_type = 0
 
-temp_sensor = 14
+temp_sensor = 0
 lum_sensor = 1
 
 button = 3
@@ -47,11 +47,11 @@ while True :
 
     if ( t_refresh >= t_actuator) : 
     	temperature()
-	    DHT() #A faire en dernier car un delai de retour de valeur digital
+	DHT() #A faire en dernier car un delai de retour de valeur digital
     	print(temp_dht)
     	print(hum)
     	print(tempe)
-	    t_refresh = 0   
+	t_refresh = 0   
 
     if digitalRead(button) : #gestion de l'affichage
         button_value += 1
@@ -59,11 +59,11 @@ while True :
             setText("Temperature : \n" +str((tempe + temp_dht)/2.0))
             setRGB(0,128,255) 	
         elif button_value == 2:
-            setText("Humidité : \n"+str(hum))
+            setText("Humidite : \n"+str(hum))
             setRGB(255,0,128)
         elif button_value == 3 :
             button_value = 0
-            setText("Luminosité \n"+"Bouton :"+str(button_value))
+            setText("Luminosite \n"+"Bouton :"+str(button_value))
         
     time.sleep(50.0/1000.0)
     t_refresh += 100
