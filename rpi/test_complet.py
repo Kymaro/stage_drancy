@@ -29,6 +29,12 @@ lum = 0
 setText("Bienvenue\ndans l'IoT Hub")
 setRGB(128,255,0)
 
+def DHT() :
+    [temp_dht,hum] = dht(dht_sensor_port,dht_sensor_type)
+
+def temperature() :
+    temp = temp(temp_sensor,'1.2')
+
 while True :
 
     if (time.time() >= t_refresh) : #si on a dépassé les 5 minutes
@@ -54,9 +60,3 @@ A priori, on a fait le tour
 
 https://docs.microsoft.com/fr-fr/azure/iot-hub/iot-hub-python-getstarted
 """
-
-def DHT() :
-    [temp_dht,hum] = dht(dht_sensor_port,dht_sensor_type)
-
-def temperature() :
-    temp = temp(temp_sensor,'1.2')
