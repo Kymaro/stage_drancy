@@ -32,6 +32,7 @@ lum = 0
 
 setText("Bienvenue\ndans l'IoT Hub")
 setRGB(128,255,0)
+time.sleep(5)
 
 def DHT() :
     global temp_dht,hum
