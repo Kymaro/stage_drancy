@@ -91,7 +91,7 @@ while True :
     	print(hum)
     	print(tempe)
 	t_refresh = 0 
-
+    screen_administrator(mode_value)
     time.sleep(50.0/1000.0)
     t_refresh += 100
 
