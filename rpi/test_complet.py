@@ -29,18 +29,16 @@ lum = 0
 setText("Bienvenue\ndans l'IoT Hub")
 setRGB(128,255,0)
 
-While True :
+while True :
 
-#    if (time.time() >= t_refresh) : #si on a dépassé les 5 minutes
-    DHT()
-    temperature()
-    print(temp_dht)
-    print(hum)
-    print(temp)
-    #t_refresh = time.time() + 60*5 #on met à jour la valeur de t_refresh pour la prochaine actualisation
-    time.sleep(1)
-
-        
+    if (time.time() >= t_refresh) : #si on a dépassé les 5 minutes
+    	DHT()
+    	temperature()
+    	print(temp_dht)
+    	print(hum)
+    	print(temp)
+    	t_refresh = time.time() + 60*5 #on met à jour la valeur de t_refresh pour la prochaine actualisation
+            
 
 
 """
