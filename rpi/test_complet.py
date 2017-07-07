@@ -19,6 +19,7 @@ B=4250
 R0 = 100000
 
 ID = getId()
+sbs = createSBS()
 
 pinMode(button,"INTPUT")
 pinMode(led,"OUTPUT")
@@ -97,6 +98,7 @@ while True :
         d = {'DeviceID' : ID, 'Temperature' : average_temp, 'Humidity' : hum,'Time' : dt }
         msg = json.dumps(d)
         print(msg)
+        sbs.send_event('dht11',msg)
     screen_administrator()
     time.sleep(50.0/1000.0)
     t_refresh += 50
