@@ -101,7 +101,7 @@ while True :
         sbs.send_event('dht11',msg)
     screen_administrator()
     time.sleep(50.0/1000.0)
-    t_refresh += 50
+    t_refresh += 1
 
 """
 https://docs.microsoft.com/fr-fr/azure/iot-hub/iot-hub-python-getstarted
