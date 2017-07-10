@@ -36,13 +36,9 @@ pinMode(lum_sensor,"INTPUT")
 time.sleep(1)
 
 t_refresh = 6000
-<<<<<<< HEAD
 t_actuator = 6000
 t_wait = 10
 
-=======
-t_actuator = 100
->>>>>>> 61f8c02eb3cb70413d21a51fbf41ba2cecf9633d
 temp_dht = 0
 hum = 0
 tempe = 0 
