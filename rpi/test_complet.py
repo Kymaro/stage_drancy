@@ -92,8 +92,6 @@ def screen_administrator() : # permet de gerer lecran sans quil refresh a chaque
         time.sleep(140.0/1000.0) #on attend 140 ms pour etre sur du temps a chaque loop
 
 while True :
-    start_time = time.time()
-    print(time.time())
     if ( t_refresh >= t_actuator) : 
     	Temperature()
 	DHT() #A faire en dernier car un delai de retour de valeur digital
@@ -107,13 +105,9 @@ while True :
         msg = json.dumps(d)
         print(msg)
         sbs.send_event('dht11',msg)
-    print(time.time() - start_time)
-    start_time = time.time()
     if (t_refresh >= t_wait) : # on attend un peu avant de refresh l ecran car valeur aberante de l encoder quand on regarde les autres capteur
         screen_administrator()
     t_refresh += 1
-    print(time.time() - start_time)    
-    time.sleep(50.0/1000.0)
 
 """
 https://docs.microsoft.com/fr-fr/azure/iot-hub/iot-hub-python-getstarted
