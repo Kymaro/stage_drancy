@@ -62,7 +62,7 @@ def DHT() : #temperature et humidite analogique
 def Temperature() : #capteur de temperature analogique
     global tempe
     analog_value = analogRead(temp_sensor)
-    R = 1024.0 - analog_value
+    R = 1023.0 - analog_value
     tempe = 1.0/(log(R)/B + 1/298.15) - 273.15
     tempe= round(tempe,1)
 
