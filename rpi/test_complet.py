@@ -104,7 +104,7 @@ while True :
         sbs.send_event('dht11',msg)
     if (t_refresh >= t_wait) : # on attend un peu avant de refresh l ecran car valeur aberante de l encoder quand on regarde les autres capteur
         screen_administrator    
-    time.sleep(50.0/1000.0)
+    #time.sleep(50.0/1000.0)
     t_refresh += 1
 
 """
