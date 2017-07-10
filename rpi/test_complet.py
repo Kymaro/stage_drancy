@@ -36,7 +36,7 @@ pinMode(lum_sensor,"INTPUT")
 time.sleep(1)
 
 t_refresh = 6000
-t_actuator = 100
+t_actuator = 1000
 t_wait = 10
 
 temp_dht = 0
@@ -74,7 +74,6 @@ def PotentiometerToDegrees(potentiometer_value) : #convertie la valeur du potent
 def screen_administrator() : # permet de gerer lecran sans quil refresh a chaque iteration 
     global mode_value
     encoder_value = analogRead(potentiometer)
-    print(encoder_value)
     if (encoder_value <=341 and encoder_value >= 0) and mode_value != 1 : #MODE 1
        	setText("Temperature : \n" +str((tempe + temp_dht)/2.0))
        	setRGB(0,128,255)
@@ -89,7 +88,8 @@ def screen_administrator() : # permet de gerer lecran sans quil refresh a chaque
        	mode_value = 3   
 
 while True :
-
+    start_time = time.time()
+    print(time.time())
     if ( t_refresh >= t_actuator) : 
     	Temperature()
 	DHT() #A faire en dernier car un delai de retour de valeur digital
@@ -97,16 +97,19 @@ while True :
     	#print(hum)
     	#print(tempe)
         average_temp = temp_dht
-	t_refresh = 0 
+	t_refresh = 10 
         dt = str(datetime.datetime.now())
         d = {'DeviceID' : ID, 'Temperature' : average_temp, 'Humidity' : hum,'Time' : dt }
         msg = json.dumps(d)
         print(msg)
         sbs.send_event('dht11',msg)
+    print(time.time() - start_time)
+    start_time = time.time()
     if (t_refresh >= t_wait) : # on attend un peu avant de refresh l ecran car valeur aberante de l encoder quand on regarde les autres capteur
-        screen_administrator()    
-    time.sleep(50.0/1000.0)
+        screen_administrator()
     t_refresh += 1
+    print(time.time() - start_time)    
+    time.sleep(50.0/1000.0)
 
 """
 https://docs.microsoft.com/fr-fr/azure/iot-hub/iot-hub-python-getstarted
