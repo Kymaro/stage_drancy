@@ -105,16 +105,10 @@ while True :
         d = {'DeviceID' : ID, 'Temperature' : average_temp, 'Humidity' : hum,'Time' : dt }
         msg = json.dumps(d)
         print(msg)
-<<<<<<< HEAD
         sbs.send_event('dht11',msg)
     if (t_refresh >= t_wait) : # on attend un peu avant de refresh l ecran car valeur aberante de l encoder quand on regarde les autres capteur
         screen_administrator    
     time.sleep(50.0/1000.0)
-=======
-        #sbs.send_event('dht11',msg)
-    screen_administrator()
-#    time.sleep(50.0/1000.0)
->>>>>>> 61f8c02eb3cb70413d21a51fbf41ba2cecf9633d
     t_refresh += 1
 
 """
