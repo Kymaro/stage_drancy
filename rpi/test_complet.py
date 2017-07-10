@@ -43,6 +43,7 @@ temp_dht = 0
 hum = 0
 tempe = 0 
 mode_value = 0
+mode_value_old = 0
 lum = 0
 
 
@@ -74,6 +75,7 @@ def PotentiometerToDegrees(potentiometer_value) : #convertie la valeur du potent
 def screen_administrator() : # permet de gerer lecran sans quil refresh a chaque iteration 
     global mode_value
     encoder_value = analogRead(potentiometer)
+    mode_value_old = mode_value
     if (encoder_value <=341 and encoder_value >= 0) and mode_value != 1 : #MODE 1
        	setText("Temperature : \n" +str((tempe + temp_dht)/2.0))
        	setRGB(0,128,255)
@@ -86,6 +88,8 @@ def screen_administrator() : # permet de gerer lecran sans quil refresh a chaque
        	setText("Luminosite \n")
        	setRGB(255,128,0)
        	mode_value = 3   
+    if not ((mode_value - mode_value_old) != 0) : #s il y a pas eu un changement de mode sur l ecran
+        time.sleep(140.0/1000.0) #on attend 140 ms pour etre sur du temps a chaque loop
 
 while True :
     start_time = time.time()
@@ -117,4 +121,11 @@ http://www.stevenfowler.me/p/send-raspberry-pi-data-azuure/
 http://www.instructables.com/id/Sending-Temperature-Sensor-Data-to-Azure-Database/
 
 login azure cli : "azure login"
+
+temps d'excecution des loop :
+
+    si actualisation : 1 loop = 450ms
+    sinon : 150 ms
+
+    
 """
