@@ -4,6 +4,13 @@ import time,datetime,json
 from math import *
 from util import *
 
+"""
+TO DO :
+    * ajout capteur luminosité
+    * faire tourner 24h les capteurs pour vérifier les valeurs
+    * avoir un capteur de température extérieur pour vérifier les valeurs (semble haute)
+    * changer DevideID par un string qui permet d'identifier la RPI pour ensuite retrouver les graphiques sur le portail azure.
+"""
 
 dht_sensor_port = 7
 dht_sensor_type = 0
@@ -30,6 +37,8 @@ time.sleep(1)
 
 t_refresh = 6000
 t_actuator = 6000
+t_wait = 10
+
 temp_dht = 0
 hum = 0
 tempe = 0 
@@ -99,13 +108,15 @@ while True :
         msg = json.dumps(d)
         print(msg)
         sbs.send_event('dht11',msg)
-    screen_administrator()
+    if (t_refresh >= t_wait) : # on attend un peu avant de refresh l ecran car valeur aberante de l encoder quand on regarde les autres capteur
+        screen_administrator    
     time.sleep(50.0/1000.0)
     t_refresh += 1
 
 """
 https://docs.microsoft.com/fr-fr/azure/iot-hub/iot-hub-python-getstarted
 http://www.stevenfowler.me/p/send-raspberry-pi-data-azuure/
+http://www.instructables.com/id/Sending-Temperature-Sensor-Data-to-Azure-Database/
 
 login azure cli : "azure login"
 """
