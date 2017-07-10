@@ -36,9 +36,13 @@ pinMode(lum_sensor,"INTPUT")
 time.sleep(1)
 
 t_refresh = 6000
+<<<<<<< HEAD
 t_actuator = 6000
 t_wait = 10
 
+=======
+t_actuator = 100
+>>>>>>> 61f8c02eb3cb70413d21a51fbf41ba2cecf9633d
 temp_dht = 0
 hum = 0
 tempe = 0 
@@ -73,25 +77,19 @@ def PotentiometerToDegrees(potentiometer_value) : #convertie la valeur du potent
 
 def screen_administrator() : # permet de gerer lecran sans quil refresh a chaque iteration 
     global mode_value
-    average_degrees = 0
-    for i in range(10) :
-        value = PotentiometerToDegrees(analogRead(potentiometer))
-        average_degrees += value / 10.0
-        time.sleep(1.0/1000.0)
-
-    if not(average_degrees <= 154.0 and average_degrees >= 151.0) : # valeur qui apparait a chaque nouvel appel des valeurs des capteurs
-    	if (average_degrees <=100 and average_degrees >= 0) and mode_value != 1 : #MODE 1
-        	setText("Temperature : \n" +str((tempe + temp_dht)/2.0))
-        	setRGB(0,128,255)
-        	mode_value = 1
-    	elif (average_degrees <= 200 and average_degrees > 100) and mode_value != 2 : #MODE 2
-        	setText("Humidite : \n"+str(hum))
-        	setRGB(255,0,128)
-        	mode_value = 2
-    	elif (average_degrees > 200 and average_degrees <=300) and mode_value != 3 : # MODE 3
-        	setText("Luminosite \n")
-        	setRGB(255,128,0)
-        	mode_value = 3   
+    encoder_value = analogRead(potentiometer)
+    if (encoder_value <=341 and encoder_value >= 0) and mode_value != 1 : #MODE 1
+       	setText("Temperature : \n" +str((tempe + temp_dht)/2.0))
+       	setRGB(0,128,255)
+       	mode_value = 1
+    elif (encoder_value <= 682 and encoder_value > 341) and mode_value != 2 : #MODE 2
+       	setText("Humidite : \n"+str(hum))
+       	setRGB(255,0,128)
+       	mode_value = 2
+    elif (encoder_value > 682 and encoder_value <=1023) and mode_value != 3 : # MODE 3
+       	setText("Luminosite \n")
+       	setRGB(255,128,0)
+       	mode_value = 3   
 
 while True :
 
@@ -101,16 +99,22 @@ while True :
     	#print(temp_dht)
     	#print(hum)
     	#print(tempe)
-        average_temp = (tempe + temp_dht)/2.0
+        average_temp = temp_dht
 	t_refresh = 0 
         dt = str(datetime.datetime.now())
         d = {'DeviceID' : ID, 'Temperature' : average_temp, 'Humidity' : hum,'Time' : dt }
         msg = json.dumps(d)
         print(msg)
+<<<<<<< HEAD
         sbs.send_event('dht11',msg)
     if (t_refresh >= t_wait) : # on attend un peu avant de refresh l ecran car valeur aberante de l encoder quand on regarde les autres capteur
         screen_administrator    
     time.sleep(50.0/1000.0)
+=======
+        #sbs.send_event('dht11',msg)
+    screen_administrator()
+#    time.sleep(50.0/1000.0)
+>>>>>>> 61f8c02eb3cb70413d21a51fbf41ba2cecf9633d
     t_refresh += 1
 
 """
