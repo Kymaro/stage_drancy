@@ -69,8 +69,10 @@ def screen_administrator() : # permet de gerer lecran sans quil refresh a chaque
         value = PotentiometerToDegrees(analogRead(potentiometer))
         average_degrees += value / 10.0
         time.sleep(1.0/1000.0)
+#    if average_degrees > 100 :
+#	print(average_degrees)
 
-    if not(average_degrees <= 154.0 and average_degrees >= 151.0) : # valeur qui apparait a chaque nouvel appel des valeurs des capteurs
+    if not(average_degrees <= 160.0 and average_degrees >= 150.0) : # valeur qui apparait a chaque nouvel appel des valeurs des capteurs
     	if (average_degrees <=100 and average_degrees >= 0) and mode_value != 1 : #MODE 1
         	setText("Temperature : \n" +str((tempe + temp_dht)/2.0))
         	setRGB(0,128,255)
@@ -92,7 +94,7 @@ while True :
     	#print(temp_dht)
     	#print(hum)
     	#print(tempe)
-        average_temp = (tempe + temp_dht)/2.0
+        average_temp = (tempe + temp_dht) / 2.0
 	t_refresh = 0 
         dt = str(datetime.datetime.now())
         d = {'DeviceID' : ID, 'Temperature' : average_temp, 'Humidity' : hum,'Time' : dt }
