@@ -6,10 +6,10 @@ from util import *
 
 """
 TO DO :
-    * ajout capteur luminosité
-    * faire tourner 24h les capteurs pour vérifier les valeurs
-    * avoir un capteur de température extérieur pour vérifier les valeurs (semble haute)
-    * changer DevideID par un string qui permet d'identifier la RPI pour ensuite retrouver les graphiques sur le portail azure.
+    * ajout capteur luminosit
+    * faire tourner 24h les capteurs pour vrifier les valeurs
+    * avoir un capteur de temprature extrieur pour vrifier les valeurs (semble haute)
+    * changer DevideID par un string qui permet dentifier la RPI pour ensuite retrouver les graphiques sur le portail azure.
 """
 
 dht_sensor_port = 7
@@ -36,7 +36,7 @@ pinMode(lum_sensor,"INTPUT")
 time.sleep(1)
 
 t_refresh = 6000
-t_actuator = 6000
+t_actuator = 100
 t_wait = 10
 
 temp_dht = 0
@@ -62,7 +62,7 @@ def DHT() : #temperature et humidite analogique
 def Temperature() : #capteur de temperature analogique
     global tempe
     analog_value = analogRead(temp_sensor)
-    R = 1023.0 - analog_value
+    R = 1023.0/analog_value - 1.0
     tempe = 1.0/(log(R)/B + 1/298.15) - 273.15
     tempe= round(tempe,1)
 
@@ -74,6 +74,7 @@ def PotentiometerToDegrees(potentiometer_value) : #convertie la valeur du potent
 def screen_administrator() : # permet de gerer lecran sans quil refresh a chaque iteration 
     global mode_value
     encoder_value = analogRead(potentiometer)
+    print(encoder_value)
     if (encoder_value <=341 and encoder_value >= 0) and mode_value != 1 : #MODE 1
        	setText("Temperature : \n" +str((tempe + temp_dht)/2.0))
        	setRGB(0,128,255)
@@ -103,8 +104,8 @@ while True :
         print(msg)
         sbs.send_event('dht11',msg)
     if (t_refresh >= t_wait) : # on attend un peu avant de refresh l ecran car valeur aberante de l encoder quand on regarde les autres capteur
-        screen_administrator    
-    #time.sleep(50.0/1000.0)
+        screen_administrator()    
+    time.sleep(50.0/1000.0)
     t_refresh += 1
 
 """
