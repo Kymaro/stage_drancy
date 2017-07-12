@@ -36,8 +36,8 @@ pinMode(lum_sensor,"INTPUT")
 time.sleep(1)
 
 t_refresh = 6000
-t_actuator = 2000
-t_wait = 10
+t_actuator = 799
+t_wait = 50
 
 temp_dht = 0
 hum = 0
@@ -95,10 +95,13 @@ while True :
     if ( t_refresh >= t_actuator) : 
     	Temperature()
 	DHT() #A faire en dernier car un delai de retour de valeur digital
+	while (isnan(temp_dht) or temp_dht == 0) : #si jamais le capteur foire au releve
+		DHT()
     	#print(temp_dht)
     	#print(hum)
     	#print(tempe)
-        average_temp = temp_dht
+        average_temp = (temp_dht + tempe)/2.0
+	average_temp = round(average_temp,1)
 	t_refresh = 10 
         dt = str(datetime.datetime.now())
         d = {'DeviceID' : ID, 'Temperature' : average_temp, 'Humidity' : hum,'Time' : dt }
