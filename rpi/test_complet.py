@@ -103,10 +103,11 @@ while True :
         average_temp = (temp_dht + tempe)/2.0
 	average_temp = round(average_temp,1)
 	t_refresh = 10 
+	identifiant = "Rpi Test"
         dt = str(datetime.datetime.now())
-        d = {'DeviceID' : ID, 'Temperature' : average_temp, 'Humidity' : hum,'Time' : dt }
+        d = {'DeviceID' : identifiant, 'Temperature' : average_temp, 'Humidity' : hum,'Time' : dt }
         msg = json.dumps(d)
-        print(msg)
+        #print(msg)
         sbs.send_event('dht11',msg)
     if (t_refresh >= t_wait) : # on attend un peu avant de refresh l ecran car valeur aberante de l encoder quand on regarde les autres capteur
         screen_administrator()
