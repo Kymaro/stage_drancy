@@ -8,8 +8,30 @@ from util import *
 TO DO :
     * ajout capteur luminosit
     * faire tourner 24h les capteurs pour vrifier les valeurs
-    * avoir un capteur de temprature extrieur pour vrifier les valeurs (semble haute)
-    * changer DevideID par un string qui permet dentifier la RPI pour ensuite retrouver les graphiques sur le portail azure.
+    PHOTO A PRENDRE :
+    TITLE : OK
+    INTRODUCTION : OK
+    PRESENTATION : OK
+    CONFIGURATION : 2.2 PREMIERE MISE EN ROUTE : PHOTO BUREAU RASPBIAN POUR OUVRIR UN TERMINAL
+                        PHOTO AVEC LA COMMANDE SUDO IFCONFIG POUR TROUVER L'IP ET LA MAC DE LA RPI
+                        PHOTO RASPI-CONFIG + explication expand memory + chgmt mot de passe utilisateur "pi" 
+                        SCREEN A L'INSTALALTION DE GROVE PI ./install.sh
+                        SCREEN TEST DETECTION SHIELD
+
+                    2.3 CHANGER PHOTO BRANCHEMENT FINAL
+                    mise à jour avec le nouveau repo 
+
+
+                    3. IMAGE DESSINANT LE CHEMINEMENT DES INFORMATIONS + DESCRIPTION DE L IMAGE
+                    PHOTO APRES L INSTALLASION DE AZURE QUI MONTRE LA LISTE DES COMMANDES QUAND ON TAPE AZURE
+                    PHOTO AVEC PAGE WEB OU LE CODE EST A MARQUE POUR AZURE LOGIN
+                    PHOTO QUI MONTRE QUE LE GROUP IOT A BIEN ETE CREE
+                    CHANGER LE CHEMIN DU .json
+                    PHOTO MONTRANT LES CHAMPS A REMPLIR POUR LE DEPLOYMENT
+                    PUIS PHOTO MONTRANT SHAREDACCESSKEY
+
+
+                    SCREEN PORTAIL TIME SHIGHTS MACHIN
 """
 
 dht_sensor_port = 7
