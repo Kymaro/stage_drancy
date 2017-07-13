@@ -38,6 +38,7 @@ time.sleep(1)
 t_refresh = 6000
 t_actuator = 799
 t_wait = 50
+compteur_echec_envoie = 0
 
 temp_dht = 0
 hum = 0
@@ -76,6 +77,9 @@ def screen_administrator() : # permet de gerer lecran sans quil refresh a chaque
     global mode_value
     encoder_value = analogRead(potentiometer)
     mode_value_old = mode_value
+    if mode_value == 4 : #si echec envoie message pendant 24h on change l affichage local pour avertir
+        setRGB(255,0,0)
+        setText("Probleme envoie\nmessage azure")
     if (encoder_value <=341 and encoder_value >= 0) and mode_value != 1 : #MODE 1
        	setText("Temperature : \n" +str((tempe + temp_dht)/2.0))
        	setRGB(0,128,255)
@@ -108,7 +112,13 @@ while True :
         d = {'DeviceID' : identifiant, 'Temperature' : average_temp, 'Humidity' : hum,'Time' : dt }
         msg = json.dumps(d)
         #print(msg)
-        sbs.send_event('dht11',msg)
+        try :
+            sbs.send_event('dht11',msg)
+            compteur_echec_envoie = 0
+        except :
+            compteur_echec_envoie += 1
+            if compteur_echec_envoie == 720 : #echec d envoie de message depuis 24h
+                mode_value = 4
     if (t_refresh >= t_wait) : # on attend un peu avant de refresh l ecran car valeur aberante de l encoder quand on regarde les autres capteur
         screen_administrator()
     t_refresh += 1
