@@ -70,6 +70,7 @@ azure group deployment create -g IoT -n deployment1 -f ~/stage_drancy/IoT.json
 
 Vous allez être inviter à entrer différentes informations. Les informations que vous allez rentrer seront indispensable car devront être ajouté au code de la station pour pouvoir envoyer les données. Les valeurs sont des chaines de caractère, celle mise en photo sont arbitraires pour le dossier, veuillez entrer une valeur différente.
 	\begin{enumerate}
+	\label{CLI}
 		\item namespaceName : Il est conseillé de rajouter NS à la fin pour vous y retrouver ensuite. %photo ici
 		\item eventHubName : Il s'agit de l'instance à proprement parlé qui va recevoir les données. vous pouvez par exemple entrer une valeur du type "Station".
 		\item consumerGroupName : Pour celle valeur, je vous conseille d'entrer la même que pour namespaceName mais de remplacer NS par GN.
@@ -134,6 +135,66 @@ Vous arrivez alors sur la fenêtre  suivante :\\
 Voilà, votre portail est en cours de déploiement, nous allons maintenant devoir faire en sorte que cette instance écoute les valeurs que l'on envoie sur le Hub d'évènement.
 
 \subsection{Ajout d'une source d'évènements dans le portail \textit{Time Series Insights}}
+
+Maintenant que vous avez créer votre instance \textit{Time Series Insights}, cliquer dessus pour voir sa page principale affichée :\\
+
+\begin{figure}[H]
+\begin{center}
+	\makebox[\textwidth]{\includegraphics[width=.7\paperwidth]{images/azure_portal_3.jpg}}
+\end{center}
+	\caption{ \textit{Menu principal du \textit{Time Series Insights}}}
+\end{figure}\\
+
+\begin{enumerate}
+	\item Cliquer sur la zone \textit{Sources d'évènements} puis sur \textit{Ajouter} en haut dans la fenêtre qui s'ouvrira.
+	\item vous devriez alors voir apparaitre cette fenêtre : 
+	\begin{figure}[H]
+\begin{center}
+	\makebox[\textwidth]{\includegraphics[width=.4\paperwidth]{images/azure_portal_4.jpg}}
+\end{center}
+	\caption{ \textit{Ajout d'une source d'évènements}}
+\end{figure}\\
+	\begin{enumerate}
+	\item C'est le nom que vous voulez donner à votre source. Le choix est arbitraire.
+	\item Choisir \textit{Hub d'évènements}.
+	\item Choisi \textit{Utiliser un Event Hub à partir des abonn..}
+	\item Ici, le champs dépend de votre abonnement.
+	\item Pour les étapes qui vont suivre, il sera nécessaire de reprendre les champs indiqué lors de la section~\ref{CLI} page~\pageref{CLI}. Pour le premier, entrer le \textit{namespaceName}.
+	\item Ici doit être indiqué \textit{l'evenHubName}.
+	\item Le choix \textit{RootManageSharedAccessKey} devrait être proposé. Il s'agit probablement de votre \textit{SharedAccessKeyName}. Sinon, renseigner votre \textit{SharedAccessKeyName}
+	\item Renseigner votre \textit{SharedAccessKey}
+	\item Ici doit être entré votre \textit{consumerGroupName}.
+	\item laisser ce dernier champs vide et cliquer sur \textit{Créer}.
+	\end{enumerate}
+\end{enumerate}\\
+
+Vous avez donc ajouté le hub d'évènement comme source pour l'instance de \textit{Time Series Insights}. Il reste alors à éditer le code de la station pour indiquer le hub sur lequel envoyer les données.
+
+
+\subsection{Configuration logiciel de la station pour \textit{Azure}}
+
+Avant de vous montrer les modifications à réaliser dans le code, quelques informations concernant celui ci. Le code est écrit dans le langage \href{https://www.python.org/}{Python}. En plus d'avoir le mérite d'être considéré comme un des langages les plus haut niveau (ie. proche du langage de l'Homme et donc intuitif), il est particulièrement adapté pour l'utilisation de script automatisé comme vous allez le faire pour la station.\\
+
+\textbf{ATTENTION : Avant de vous faire découvrir le code et de vous expliquer les lignes à modifier pour pouvoir envoyer vos données, une petite explication sur l'architecture d'un code Python. Il est impératif de respecter les indentations (espacement) du code. Si jamais vous rajouter ne serait-ce qu'un espace sur une ligne, cela peut avoir comme effet de faire planter l'intégralité de la station. Si cela ce produit, pour simplifier le problème, reportez vous à l'annexe N°1.}\\
+
+Il reste cependant une étape avant de modifier le code. En effet, il est nécessaire d'installer la bibliothèque azure sur la \textit{RaspberryPi}. Pour cela, connectez vous en ssh dessus puis entrer la commande :\\
+
+\begin{lstlisting}[style=MyBashStyle]
+	sudo pip install azure-servicebus
+\end{lstlisting}\\
+
+Nous pouvons désormais regarder le code :\\ 
+\newpage
+\pythonexternal{../rpi/test_complet.py}\\
+
+Maintenant que vous avez le code à disposition avec les lignes, vous allez pouvoir réaliser les changements de manière un peu plus lisible. Pour éditer le fichier, effectuer la commande :
+
+\begin{lstlisting}[style=MyBashStyle]
+	sudo nano /home/pi/DrancIoT/code/
+\end{lstlisting}\\
+
+
+
 
 
 
