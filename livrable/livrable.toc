@@ -24,3 +24,4 @@
 \contentsline {subsection}{\numberline {3.1.3}Cr\IeC {\'e}ation d'un portail \textit {Time Series Insights}}{16}{subsection.3.1.3}
 \contentsline {subsection}{\numberline {3.1.4}Ajout d'une source d'\IeC {\'e}v\IeC {\`e}nements dans le portail \textit {Time Series Insights}}{19}{subsection.3.1.4}
 \contentsline {subsection}{\numberline {3.1.5}Configuration logiciel de la station pour \textit {Azure}}{21}{subsection.3.1.5}
+\contentsline {subsection}{\numberline {3.1.6}Affichage et traitement des donn\IeC {\'e}es sur \textit {Time Series Insights}}{23}{subsection.3.1.6}

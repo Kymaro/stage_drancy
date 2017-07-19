@@ -206,7 +206,7 @@ Vous devriez alors obtenir un résultat similaire à celui là :
 Vous allez maintenant télécharger le code pour activer le station. Pour cela, brancher votre \textit{RaspberryPi} au secteur et au réseau si jamais vous aviez enlevé le câble ethernet. Connectez vous en \textit{ssh} via \textit{git bash} et exécutez les deux commandes :\\
 		\begin{lstlisting}[style=MyBashStyle]
 	cd
-	git clone https://github.com/Kymaro/stage_drancy
+	git clone https://github.com/Kymaro/DrancIoT
 		\end{lstlisting}\\
 %mettre la commande git clone du repo final
 
@@ -217,7 +217,7 @@ Cette commande va télécharger le code nécessaire au fonctionnement de la stat
 Tapez la commande :\\
 
 \begin{lstlisting}[style=MyBashStyle]
-	ls | grep stage_drancy
+	ls | grep DrancIoT
 \end{lstlisting}\\
 
 \begin{figure}[H]
@@ -242,7 +242,7 @@ Un fichier va alors s'ouvrir dans votre terminal, vous ne pouvez pas utiliser la
 Tapez alors sur cette nouvelle ligne :\\
 
 \begin{lstlisting}[style=MyBashStyle]
-	sudo python /home/pi/stage_drancy/rpi/test_complet.py &
+	sudo python /home/pi/DrancIoT/code/station.py &
 \end{lstlisting}\\
 
 L' esperluette permet d'exécuter le script en tâche de fond, il est important de ne pas l'oublier sinon votre \textit{RaspberryPi} ne sera pas capable de faire autre chose que de lancer votre script.
@@ -267,7 +267,7 @@ NOTE : Lorsque vous indiquez le chemin d'un fichier en \textit{Bash}, vous avez 
 
 \begin{lstlisting}[style=MyBashStyle]
 	cd
-	sudo python stage_drancy/rpi/test_complet.py &
+	sudo python DrancIoT/code/station.py &
 \end{lstlisting}\\
 
 Cela ne vous rappelle rien ? Il s'agit ni plus ni moins de la ligne qui a été ajoutée dans le fichier \textit{/etc/rc.local} pour démarrer automatiquement le script. (il manque /home/pi/ puisque nous sommes dans ce dossier par défaut).
