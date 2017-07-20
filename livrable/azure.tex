@@ -168,14 +168,29 @@ Maintenant que vous avez créer votre instance \textit{Time Series Insights}, cl
 	\end{enumerate}
 \end{enumerate}\\
 
-Vous avez donc ajouté le hub d'évènement comme source pour l'instance de \textit{Time Series Insights}. Il reste alors à éditer le code de la station pour indiquer le hub sur lequel envoyer les données.
+Vous avez donc ajouté le hub d'évènement comme source pour l'instance de \textit{Time Series Insights}. Il faut maintenant gérer les accès à cette instance. Il faut pour cela vous y ajouter dans un premier temps. Rendez vous alors sur la page principal de \textit{Time Series Insights}.\\
+
+\begin{enumerate}
+\item Sur le menue de gauche, cliquer alors sur \textit{Stratégies d'accès aux données}.
+\item Cliquer sur \textit{Ajouter} en haut. Puis sur  \textit{Sélectionner un utilisateur}.
+\item En tant qu'administrateur du portail, vous devriez voir apparaitre votre adresse mail dans la liste. Si vous n'êtes pas l'administrateur, renseignez vous auprès de lui pour qu'il vous envoie une invitation.
+\item Puis aller ensuite sur \textit{Sélectionner un rôle}. Vous avez alors deux choix : \textit{Lecteur} ou \textit{Contributeur}. Pous vous, sélectionner \textit{Contributeur}.
+\item Cliquer alors sur \textit{OK}.
+\end{enumerate}\\
+
+
+Vous êtes désormais en mesure d'accéder au \textit{Time Series Insights}. Pour cela, dans la \textit{Vue d'ensemble} (page principale de l'instance), Cliquer sur \textit{Accéder à l' Environnement}.\\
+
+\textbf{Pour ajouter un autre utilisateur sur l'instance, refaire les même étapes. Cependant, si l'utilisateur n'a pas son compte dans la liste lors de l'étape N°3, Cliquer sur \textit{Inviter} en haut du menu et renseigner l'adresse mail de l'utilisateur pour lui envoyer une invitation. Un lien lui sera envoyé.\\
+
+Cependant, vous devrez également l'ajouter dans le menu \textit{Contrôle d'accès (IAM)} du \textit{Time Series Insights}. De la même façon, cliquer sur \textit{Ajouter}, sélectionner un rôle puis l'utilisateur. Enfin, cliquer sur \textit{Enregistrer}.}\\
 
 
 \subsection{Configuration logiciel de la station pour \textit{Azure}}
-
+\label{CONFIG}
 Avant de vous montrer les modifications à réaliser dans le code, quelques informations concernant celui ci. Le code est écrit dans le langage \href{https://www.python.org/}{Python}. En plus d'avoir le mérite d'être considéré comme un des langages les plus haut niveau (ie. proche du langage de l'Homme et donc intuitif), il est particulièrement adapté pour l'utilisation de script automatisé comme vous allez le faire pour la station.\\
 
-\textbf{ATTENTION : Avant de vous faire découvrir le code et de vous expliquer les lignes à modifier pour pouvoir envoyer vos données, une petite explication sur l'architecture d'un code Python. Il est impératif de respecter les indentations (espacement) du code. Si jamais vous rajouter ne serait-ce qu'un espace sur une ligne, cela peut avoir comme effet de faire planter l'intégralité de la station. Si cela ce produit, pour simplifier le problème, reportez vous à l'annexe N°1.}\\
+\textbf{ATTENTION : Avant de vous faire découvrir le code et de vous expliquer les lignes à modifier pour pouvoir envoyer vos données, une petite explication sur l'architecture d'un code Python. Il est impératif de respecter les indentations (espacement) du code. Si jamais vous rajouter ne serait-ce qu'un espace sur une ligne, cela peut avoir comme effet de faire planter l'intégralité de la station. Si cela ce produit, pour simplifier le problème, reportez vous à l'annexe N°1 page~\pageref{ANNEXE1}.}\\
 
 Il reste cependant une étape avant de modifier le code. En effet, il est nécessaire d'installer la bibliothèque azure sur la \textit{RaspberryPi}. Pour cela, connectez vous en ssh dessus puis entrer la commande :\\
 
@@ -185,7 +200,7 @@ Il reste cependant une étape avant de modifier le code. En effet, il est néces
 
 Nous pouvons désormais regarder le code :\\ 
 \newpage
-\pythonexternal{../../DrancIoT/code/station.py}\\
+\pythonexternal{./station.py}\\
 
 Maintenant que vous avez le code à disposition avec les lignes, vous allez pouvoir réaliser les changements de manière un peu plus lisible. Pour éditer le fichier, effectuer la commande :
 
@@ -194,15 +209,21 @@ Maintenant que vous avez le code à disposition avec les lignes, vous allez pouv
 \end{lstlisting}\\
 
 Modifier alors les lignes suivantes : 
-\begin{enumerate} %numero de ligne a changer dans la version final
+\begin{enumerate}
 	\item Ligne 6 & 7 : Retirer le dièze pour importer les bibliothèques azure que vous venez d'installer.
-	\item Ligne 29 : Il s'agit de l'identifiant qui caractérisera votre station dans le portail \textit{Azure}. indiquer donc une chaine de caractère qui vous permettra ensuite d'identifier qu'elle station elle représente sur \textit{Azure}. Cet identifiant permettra de classer les stations.
-	\item Ligne 57 à 67 : Supprimer, lorsqu'il y en a un, le dièze.
-	\item Ligne 60 : Indiquer entre les ' votre \textit{namespaceName} créer avec la \textit{CLI}.
-	\item Ligne 61 : Indiquer toujours entre les ' votre \textit{SharedAccessKeyName}.
-	\item Ligne 62 : de la même façon indiquer la \textit{SharedAccessKey}.
-	\item Ligne 69 : Retirer le dièze.
-	\item Ligne 83 : Retirer le dièze et remplacer dans les ' par votre \textit{eventHubName} créé avec le \textit{CLI}. 
+	\item Ligne 27 : Il s'agit de l'identifiant qui caractérisera votre station dans le portail \textit{Azure}. indiquer donc une chaine de caractère qui vous permettra ensuite d'identifier qu'elle station elle représente sur \textit{Azure}.
+	\item Ligne 77 à 85 : Supprimer, lorsqu'il y en a un, le dièze à gauche.
+	\item Ligne 79 : Indiquer entre les ' votre \textit{namespaceName} créer avec la \textit{CLI}.
+	\item Ligne 80 : Indiquer toujours entre les ' votre \textit{SharedAccessKeyName}.
+	\item Ligne 81 : de la même façon indiquer la \textit{SharedAccessKey}.
+	\item Ligne 87 : Retirer le dièze.
+	\item Ligne 104 : Retirer le dièze (de gauche) et remplacer dans les ' par votre \textit{eventHubName} créé avec le \textit{CLI}. 
+	\item Quitter alors le fichier avec la suite de touches :\\
+	\begin{lstlisting}[style=MyBashStyle]
+	Ctrl + X
+	Y
+	Entree
+\end{lstlisting}\\
 \end{enumerate}
 
 La station est maintenant prête à l'emploie. Nous allons pouvoir la tester. Pour cela faite la commande :\\
@@ -236,8 +257,9 @@ Je vous ai mis en évidence 2 zones.
 \end{figure}\\
 
 \begin{enumerate}
-\item Vous pouvez choisir une tranche horaire personnalisé avec un point de départ et un point d'arrivé.
-\item Attention à ce menu déroulant. Veillez à bien choisir \textit{Local}.
+\item Vous pouvez choisir une tranche horaire personnalisé avec un point de départ et un point d'arrivé.\\
+\item Attention à ce menu déroulant. Veillez à bien choisir \textit{Local}.\\
+\textbf{Note : après plusieurs tests, il se peut qu'il y ait des soucis vis à vis des fuseaux horaire Local et UTC. Pour avoir le bon horaire, sélectionner Local mais avec une tranche horaire qui prend en compte minimum 3h avant l'heure actuel en choisissant par exemple "Last 3 hours"}.\\
 \item Vous pouvez choisir des fenêtre déjà créée qui prennent les dernière valeur sur un temps voulue.
 \item les flèches vous permette de mettre à jour les valeurs reçu. Si vous cliquer sur \textit{Auto off}, ce la passera en mode \textit{Auto On} qui est donc le rafraîchissement automatique.
 \item Enfin cliquer sur la loupe pour appliquer votre sélection.
@@ -248,9 +270,20 @@ Je vous ai mis en évidence 2 zones.
 \item Le premier menu déroulant vous permet de choisir la donnée que vous voulez afficher. Vous aurez alors le choix entre  \textit{la Temperature},\textit{l'Humidité} ou encore \textit{La luminosité}.
 \item Le second menu déroulant vous permet de choisir comment distinguer les évènements que vous recevez. Choisissez alors \textit{DevideID} pour séparer les évènements par \textit{station}. 
 \end{enumerate}
-\end{enumerate}
+\end{enumerate}\\
 
-% ajouter le control d'acces des compte au portail.
+L'installation de notre station est effective, il ne reste plus qu'a recommencer pour chaque station. Le processus sera plus rapide puisque vous avez déjà créé les instance dans le portail \textit{Azure}.
+
+
+\section{Mise en place de plusieurs stations}
+
+Cette partie va s'avérer très courte puisque la partie précédente était avant tout la première mise en route des instances \textit{Azure}. Mais avant toute chose, voici quelques informations qui vous permettra d'en savoir plus vis à vis de votre abonnement \textit{Time Series Insight}.\\
+
+L'abonnement le plus basique pour \textit{Time Series Insights} est prévu pour 1 million d'évènements par jours. Cela signifie qu'il peut recueillir 1 million de messages. Hors, une station envoie 1 message toute les deux minutes environ, ce qui équivaut à 720 messages par jour. Ainsi, sur un portail \textit{Time Series Insights}, Vous pouvez, théoriquement, installer au minimum jusqu'à 1388 stations !\\
+
+Comme cette capacité induit un coût d'abonnement, il sera préférable de remplir au maximum un seul et même \textit{Time Series Insights}, d'où l'importance de choisir un bon \textit{identifiant} lors de la modification du code.\\
+
+Pour l'ajout de nouvelles stations, recommencer alors la sous-section~\ref{CONFIG} page~\pageref{CONFIG}.
 
 
 
