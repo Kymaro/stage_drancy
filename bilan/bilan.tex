@@ -1,0 +1,89 @@
+\documentclass[a4paper]{report}
+
+%====================== PACKAGES ======================
+
+\usepackage[french]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{xr}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{url}
+\usepackage[colorlinks=true,urlcolor=blue]{hyperref}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{setspace}
+\usepackage{abstract}
+\usepackage[T1]{fontenc}
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{subfig}
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{hhline}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\usepackage{listings}
+\usepackage{url}
+\lstdefinestyle{numbers} {numbers=left, stepnumer=1, numberstyle=\tiny, numbersep=10pt}
+\lstdefinestyle{MyFrame}{backgroundcolor=\color{white},frame=shadowbox}
+\lstdefinestyle{MyBashStyle}{language=bash,style=numbers,style=MyFrame,frames=lines}
+\lstdefinestyle{MyPythonStyle}{language=python,style=numbers,style=MyFrame,frame=lines}
+\lstset{language=bash,frame=lines}
+\lstset{language=python,frame=lines}
+
+\newcommand\pythonstyle{\lstset{
+language=Python,
+style=numbers,
+basicstyle=\ttfamily\scriptsize,
+otherkeywords={self},{True},{False},             % Add keywords here
+keywordstyle=\color{deepblue}\bfseries,
+commentstyle=\color{deepred},
+stringstyle=\color{deepgreen},
+showstringspaces=false
+frame=tb,
+showstringspaces=false
+}}
+
+\newcommand\pythonexternal[2][]{{
+\pythonstyle
+\lstinputlisting[#1]{#2}}}
+
+
+%====================== INFORMATION ET REGLES ======================
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+\hypersetup{			
+pdfauthor = {Florian GRANTE},	
+pdftitle = {Monitoring : Mise en place d'une solution IoT avec Microsoft Azure},
+pdfsubject = {Livrable 1},
+pdfkeywords = {IoT, Microsoft, informatique, Azure, Raspberry pi},
+pdfstartview={FitH}}
+%======================== DEBUT DU DOCUMENT ========================
+\begin{document}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\input{./title.tex}
+\thispagestyle{empty}
+\tableofcontents
+\thispagestyle{empty}
+\setcounter{page}{0}
+\renewcommand{\arraystretch}{1.5}
+%====================== INCLUSION DES PARTIES ======================
+~
+\thispagestyle{empty}
+\setcounter{page}{0}
+\newpage
+\input{./introduction.tex}
+\input{./presentation.tex}
+\input{./configuration.tex}
+\input{./azure.tex}
+\input{./conclusion.tex}
+\newpage
+\input{./annexe.tex}
+\newpage
+\nocite{*}
+
+\end{document}

@@ -29,3 +29,4 @@
 \contentsline {chapter}{Conclusion}{26}{chapter*.28}
 \contentsline {chapter}{Annexes}{27}{chapter*.29}
 \contentsline {section}{Annexe 1 : Remise \IeC {\`a} 0 du code}{27}{section*.30}
+\contentsline {section}{Annexe 2 : Alimentation PoE de la \textit {RaspberryPi}}{27}{section*.31}
