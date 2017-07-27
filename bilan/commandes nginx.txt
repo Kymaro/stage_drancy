@@ -1,0 +1,67 @@
+sudo apt-get install build-essential libpcre3 libpcre3-dev libssl-dev
+wget http://nginx.org/download/nginx-1.6.2.tar.gz
+wget https://github.com/arut/nginx-rtmp-module/archive/master.zip
+tar -zxvf nginx-1.6.2.tar.gz
+unzip master.zip
+cd nginx-1.6.2
+./configure --with-http_ssl_module --add-module=../nginx-rtmp-module-master
+make
+sudo make install
+cd ..
+rm -R nginx-1.6.2
+rm -R rtmp-module-master
+
+sudo 
+
+sudo nano /usr/local/nginx/conf/nginx.conf
+
+user pi;
+
+rtmp {
+        server {
+                listen 1935;
+                chunk_size 128;
+
+                application live {
+                        live on;
+                        exec_push omxplayer --live rtmp://localhost:1935/live/stream;
+                        record off;
+                }
+        }
+}
+
+sudo bash -c "echo 'sudo /usr/local/nginx/sbin/nginx' > /etc/init.d/nginx"; sudo chmod 775 /etc/init.d/nginx; sudo /usr/sbin/update-rc.d -f nginx defaults
+
+
+stream
+
+stream6516.cloudapp.net
+
+52.232.111.187
+
+firewall-cmd --zone=public --add-service=http
+firewall-cmd --zone=public --add-port=1935/tcp 
+
+
+
+ffmpeg -rtsp_transport tcp -i 
+rtsp://IP.CAM.ADD.RESS/live1.sdp 
+-framerate 30 -video_size 1280×720 -vcodec libx264 
+-preset veryfast -maxrate 1984k -bufsize 3968k -vf “format=yuv420p” -g 60 -c:a aac -b:a 128k -ar 44100 -f flv 
+rtmp://YOUTUBELIVE/DIR/StreamKey
+
+
+PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure --prefix="$HOME/ffmpeg_build" \
+  --extra-cflags="-I$HOME/ffmpeg_build/include" --extra-ldflags="-L$HOME/ffmpeg_build/lib -ldl" \
+  --bindir="$HOME/bin" --pkg-config-flags="--static" \
+  --enable-gpl \
+  --enable-libfdk_aac \
+  --enable-libfreetype \
+  --enable-libmp3lame \
+  --enable-libopus \
+  --enable-libx264 \
+  --enable-libx265 \
+  --enable-nonfree
+
+yum install openssl-devel
+yum groupinstall "Development Tools"
