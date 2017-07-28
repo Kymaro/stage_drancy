@@ -1,0 +1,28 @@
+Plan dossier Bilan 
+
+I / Monitoring : Mise en place d’une solution IoT avec Azure
+
+	A/ Cahier des charges 
+	B/ L'unité de calcul 
+		a/ RPI
+		b/ edison
+		c/ le choix 
+	C/ Les composants
+		a/ Shield
+		b/ Temperature & Humidité
+		c/ Luminosité
+		d/ le bouton
+		e/ L'ecran
+
+	D/ Le langage de programmation
+	E/ Le coût
+
+
+II / Remise à niveau d'une microsoft surface "coffee table"
+
+
+
+DOSSIER TUTO : AJOUT PHOTO CLI
+		AJOUT COMMANDE MISE A LA BONNE HEURE
+ANNEXE 3 : IMPRESSION 3D
+PHOTO CAPTEUR LUMINOSITE

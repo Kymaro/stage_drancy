@@ -1,0 +1,156 @@
+Azure, création de la VM. utilisateur et mdp 
+
+Cree, connexion ssh avec utilisateur
+sudo su -> mdp utilisateur
+une fois passé en root 
+passwd => changement mdp root
+
+exit pour quitter ssh 
+
+test connexion ssh root
+
+virer le firewall => systemctl disable firewalld
+
+INSTALLATION NGINX 
+
+yum groupinstall 'Development Tools'
+yum install pcre-devel
+yum install openssl-devel
+wget http://nginx.org/download/nginx-1.6.2.tar.gz
+wget https://github.com/arut/nginx-rtmp-module/archive/master.zip
+tar -zxvf nginx-1.6.2.tar.gz
+yum install unzip
+unzip master.zip
+cd nginx-1.6.2/
+./configure --with-http_ssl_module --add-module=../nginx-rtmp-module-master
+make
+make install
+rm -r nginx-1.6.2/ nginx-rtmp-module-master/
+
+NGINX installe. Test : 
+/usr/local/nginx/sbin/nginx
+
+Aller sur l'IP dans un web browser devrait voir 'welcome to nginx'
+
+/usr/local/nginx/sbin/nginx -s stop pour le couper.
+
+modif fichier config : (voir commande nginx.txt)
+
+Mise en place plusieurs fichier de config 
+Launch at start
+
+sudo nano /etc/init.d/nginx
+
+#!/bin/sh
+#
+# nginx - this script starts and stops the nginx daemin
+#
+# chkconfig:   - 85 15 
+# description:  Nginx is an HTTP(S) server, HTTP(S) reverse \
+#               proxy and IMAP/POP3 proxy server
+# processname: nginx
+# config:      /usr/local/nginx/conf/nginx.conf
+# pidfile:     /usr/local/nginx/logs/nginx.pid
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# Source networking configuration.
+. /etc/sysconfig/network
+
+# Check that networking is up.
+[ "$NETWORKING" = "no" ] && exit 0
+
+nginx="/usr/local/nginx/sbin/nginx"
+prog=$(basename $nginx)
+
+NGINX_CONF_FILE="/usr/local/nginx/conf/nginx.conf"
+
+lockfile=/var/lock/subsys/nginx
+
+start() {
+    [ -x $nginx ] || exit 5
+    [ -f $NGINX_CONF_FILE ] || exit 6
+    echo -n $"Starting $prog: "
+    daemon $nginx -c $NGINX_CONF_FILE
+    retval=$?
+    echo
+    [ $retval -eq 0 ] && touch $lockfile
+    return $retval
+}
+
+stop() {
+    echo -n $"Stopping $prog: "
+    killproc $prog -QUIT
+    retval=$?
+    echo
+    [ $retval -eq 0 ] && rm -f $lockfile
+    return $retval
+}
+
+restart() {
+    configtest || return $?
+    stop
+    start
+}
+
+reload() {
+    configtest || return $?
+    echo -n $"Reloading $prog: "
+    killproc $nginx -HUP
+    RETVAL=$?
+    echo
+}
+
+force_reload() {
+    restart
+}
+
+configtest() {
+  $nginx -t -c $NGINX_CONF_FILE
+}
+
+rh_status() {
+    status $prog
+}
+
+rh_status_q() {
+    rh_status >/dev/null 2>&1
+}
+
+case "$1" in
+    start)
+        rh_status_q && exit 0
+        $1
+        ;;
+    stop)
+        rh_status_q || exit 0
+        $1
+        ;;
+    restart|configtest)
+        $1
+        ;;
+    reload)
+        rh_status_q || exit 7
+        $1
+        ;;
+    force-reload)
+        force_reload
+        ;;
+    status)
+        rh_status
+        ;;
+    condrestart|try-restart)
+        rh_status_q || exit 0
+            ;;
+    *)
+        echo $"Usage: $0 {start|stop|status|restart|condrestart|try-restart|reload|force-reload|configtest}"
+        exit 2
+esac
+
+
+sudo chmod +x /etc/init.d/nginx
+
+sudo /sbin/chkconfig nginx on
+
+sudo /sbin/chkconfig --list nginx

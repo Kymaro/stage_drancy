@@ -24,6 +24,8 @@ rtmp {
 
                 application live {
                         live on;
+			meta copy;
+			push rtmp://Live-fra.Twitch.TV/app/streamkey
                         exec_push omxplayer --live rtmp://localhost:1935/live/stream;
                         record off;
                 }

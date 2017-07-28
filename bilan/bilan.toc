@@ -1,0 +1,17 @@
+\select@language {french}
+\contentsline {chapter}{Introduction}{1}{chapter*.2}
+\contentsline {chapter}{\numberline {1}Monitoring : Mise en place d\IeC {\textquoteright }une solution IoT avec Azure}{2}{chapter.1}
+\contentsline {section}{\numberline {1.1}Le cahier des charges}{2}{section.1.1}
+\contentsline {section}{\numberline {1.2}La base de la station}{3}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}La \textit {Raspberry Pi}}{3}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}\textit {L'Intel Edison}}{4}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {1.2.3}Le choix de la base de la station}{5}{subsection.1.2.3}
+\contentsline {section}{\numberline {1.3}Les composants}{6}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}Le Shield}{6}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}Capteur de temp\IeC {\'e}rature et d'humidit\IeC {\'e}}{6}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {1.3.3}Capteur de luminosit\IeC {\'e}}{7}{subsection.1.3.3}
+\contentsline {subsection}{\numberline {1.3.4}L'\IeC {\'e}cran d'affichage}{7}{subsection.1.3.4}
+\contentsline {subsection}{\numberline {1.3.5}L'encodeur rotatif}{7}{subsection.1.3.5}
+\contentsline {subsection}{\numberline {1.3.6}PoE Splitter}{7}{subsection.1.3.6}
+\contentsline {section}{\numberline {1.4}Le langage de programmation}{7}{section.1.4}
+\contentsline {section}{\numberline {1.5}Le co\IeC {\^u}t d'une station}{9}{section.1.5}
